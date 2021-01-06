@@ -11,6 +11,6 @@ samples_meta=samples_meta.set_index("Sample", drop = False)
 def assembly_input(wildcards):
   sample=wildcards["sample"]
   if config["trim"] == 0:
-    return samples_meta.Path[wildcards.sample]
+    return os.path.join(sample, sample+".fastq")
   else:
     return os.path.join(sample, sample+"_trimmed.fastq")
