@@ -75,4 +75,4 @@ snakemake --snakefile $script_dir/SnakeFile --cores $THREADS \
   --config samples=$(realpath $INPUT_PATH) outdir=/mnt/e/data/staging pipeline_dir=$script_dir trim=$TRIM outfile=$AGGREGATE_PATH aggregate=$AGGREGATE
 
 # clean up
-rm /mnt/e/data/staging/.snakemake
+rm -rf /mnt/e/data/staging/.snakemake
