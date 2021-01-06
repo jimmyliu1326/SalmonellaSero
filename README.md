@@ -25,3 +25,4 @@ SamnSero.sh -i samples.csv
 * flye >= 2.7
 * snakemake >= 3.1.3
 * porechop >= 0.2.4
+* sistr >= 1.1.1
