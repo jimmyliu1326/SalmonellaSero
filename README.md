@@ -7,9 +7,9 @@ The snakemake pipeline functions to predict Salmonella serotypes from raw Nanopo
 ```
 Required arguments:
 -i|--input    Path to input samples.csv containing sample name and path to DIRECTORIES containing multiple fastq files, no headers required
+-o|--output   Path to output directory
 
 Optional arguments:
---aggregate   Specify an output file path that will contain the aggregated serotyping results of all the samples included in a single run
 --notrim      Disable adapator trimming by porechop
 -t|--threads  Number of threads
 -h|--help     Display help message
@@ -17,7 +17,7 @@ Optional arguments:
 
 Example command line for pipeline execution:
 ```
-SamnSero.sh -i samples.csv
+SamnSero.sh -i samples.csv -o path/to/output
 ```
 
 ## Dependencies
