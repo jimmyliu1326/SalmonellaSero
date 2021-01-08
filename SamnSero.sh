@@ -6,6 +6,7 @@ SamnSero.sh [options]
 
 Required arguments:
 -i|--input          .csv file with first column as sample name and second column as path to DIRECTORIES containing fastq files, no headers required
+-o|--output         Path to output directory
 
 Optional arguments:
 -t|--threads        Number of threads [Default = 32]
@@ -23,7 +24,7 @@ TRIM=1
 script_dir=$(dirname $(realpath $0))
 
 # parse arguments
-opts=`getopt -o hi:o:t: -l help,input:,output:,threads:,db:,notrim,aggregate: -- "$@"`
+opts=`getopt -o hi:o:t: -l help,input:,output:,threads:,db:,notrim -- "$@"`
 eval set -- "$opts"
 if [ $? != 0 ] ; then echo "SamnSero: Invalid arguments used, exiting"; usage; exit 1 ; fi
 if [[ $1 =~ ^--$ ]] ; then echo "SamnSero: Invalid arguments used, exiting"; usage; exit 1 ; fi
@@ -31,9 +32,9 @@ if [[ $1 =~ ^--$ ]] ; then echo "SamnSero: Invalid arguments used, exiting"; usa
 while true; do
     case "$1" in
         -i|--input) INPUT_PATH=$2; shift 2;;
+        -o|--output) OUTPUT_PATH=$2; shift 2;;
         -t|--threads) THREADS=$2; shift 2;;
         --notrim) TRIM=0; shift 1;;
-        --aggregate) AGGREGATE_PATH=$(realpath $2); AGGREGATE=1; shift 2;;
         --) shift; break ;;
         -h|--help) usage; exit 0;;
     esac
@@ -41,6 +42,7 @@ done
 
 # check if required arguments present
 if test -z $INPUT_PATH; then echo "SamnSero: Required argument -i is missing, exiting"; exit 1; fi
+if test -z $OUTPUT_PATH; then echo "SamnSero: Required argument -o is missing, exiting"; exit 1; fi
 
 # check if dependencies are installed
 medaka_consensus -h 2&>1 /dev/null
@@ -72,7 +74,4 @@ done < $INPUT_PATH
 
 # call snakemake
 snakemake --snakefile $script_dir/SnakeFile --cores $THREADS \
-  --config samples=$(realpath $INPUT_PATH) outdir=/mnt/e/data/staging pipeline_dir=$script_dir trim=$TRIM outfile=$AGGREGATE_PATH aggregate=$AGGREGATE
-
-# clean up
-rm -rf /mnt/e/data/staging/.snakemake
+  --config samples=$(realpath $INPUT_PATH) outdir=$OUTPUT_PATH pipeline_dir=$script_dir trim=$TRIM
