@@ -1,6 +1,6 @@
 rule sistr:
   input:
-    polished_asm="{sample}/{sample}_consensus.fasta"
+    polished_asm="{sample}/{sample}.fasta"
   output:
     sistr_res="{sample}/{sample}_sistr_res.csv"
   params:

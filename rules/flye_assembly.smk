@@ -18,7 +18,9 @@ rule medaka:
     reads=assembly_input
   output:
     medaka_dir=temp("{sample}/medaka"),
-    polished_asm="{sample}/{sample}_consensus.fasta"
+    fai=temp("{sample}_flye.fasta.fai"),
+    mmi=temp("{sample}_flye.fasta.mmi"),
+    polished_asm="{sample}/{sample}.fasta"    
   threads: 16
   log: "{sample}/logs/medaka.log"
   shell:
