@@ -8,11 +8,6 @@ include: "rules/sistr_serotyping.smk"
 workdir: config["outdir"]
 
 # target rule
-if config['aggregate'] == 0:
-  rule all:
-    input:
-      expand("{sample}/{sample}_sistr_res.csv", sample=samples_meta.Sample)
-else:
-  rule all:
-    input:
-      config['outfile']
+rule all:
+   input:
+    "sistr_res_aggregate.csv"
