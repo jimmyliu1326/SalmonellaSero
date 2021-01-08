@@ -14,7 +14,7 @@ rule aggregate:
   input:
     sistr_res=expand("{sample}/{sample}_sistr_res.csv", sample=samples_meta.Sample)
   output:
-    aggregate_res=config['outfile']
+    aggregate_res="sistr_res_aggregate.csv"
   threads: 1
   shell:
     "awk 'NR == 1 || FNR > 1' {input.sistr_res} > {output.aggregate_res}"
