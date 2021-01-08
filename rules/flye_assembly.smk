@@ -2,8 +2,8 @@ rule flye:
   input: 
     reads=assembly_input
   output:
-    flye_dir="{sample}/flye",
-    assembly="{sample}/{sample}_flye.fasta"
+    flye_dir=temp("{sample}/flye"),
+    assembly=temp("{sample}/{sample}_flye.fasta")
   threads: 16
   log: "{sample}/logs/flye.log"
   shell:
@@ -17,7 +17,7 @@ rule medaka:
     assembly="{sample}/{sample}_flye.fasta",
     reads=assembly_input
   output:
-    medaka_dir="{sample}/medaka",
+    medaka_dir=temp("{sample}/medaka"),
     polished_asm="{sample}/{sample}_consensus.fasta"
   threads: 16
   log: "{sample}/logs/medaka.log"
