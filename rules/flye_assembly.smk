@@ -21,7 +21,7 @@ rule medaka:
     fai=temp("{sample}/{sample}_flye.fasta.fai"),
     mmi=temp("{sample}/{sample}_flye.fasta.mmi"),
     polished_asm="{sample}/{sample}.fasta"    
-  threads: 16
+  threads: config["threads"]
   log: "{sample}/logs/medaka.log"
   shell:
     """

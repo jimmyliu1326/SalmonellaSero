@@ -10,6 +10,7 @@ Required arguments:
 
 Optional arguments:
 -t|--threads        Number of threads [Default = 32]
+--notrim            Disable adaptor trimming by Porechop
 -h|--help           Display help message
 "
 }
@@ -74,4 +75,4 @@ done < $INPUT_PATH
 
 # call snakemake
 snakemake --snakefile $script_dir/SnakeFile --cores $THREADS \
-  --config samples=$(realpath $INPUT_PATH) outdir=$OUTPUT_PATH pipeline_dir=$script_dir trim=$TRIM
+  --config samples=$(realpath $INPUT_PATH) outdir=$OUTPUT_PATH pipeline_dir=$script_dir trim=$TRIM threads=$THREADS
