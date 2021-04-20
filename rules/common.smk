@@ -3,7 +3,7 @@ import os
 
 # parse samples metadata
 samples_tbl=config["samples"]
-samples_meta=pd.read_csv(samples_tbl, header = None)
+samples_meta=pd.read_csv(samples_tbl, header = None, dtype = str)
 samples_meta.columns=["Sample", "Path"]
 samples_meta=samples_meta.set_index("Sample", drop = False)
 
